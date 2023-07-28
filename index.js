@@ -32,12 +32,20 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
 
-    const featureCollection = client.db("asiaJapanDB").collection("features")
+    const featureCollection = client.db("asiaJapanDB").collection("features");
+    const popularPropertiesCollection = client.db("asiaJapanDB").collection("popularProperties");
 
     app.get("/features", async(req, res) =>{
         const result = await featureCollection.find().toArray()
         res.send(result);
     });
+
+    app.get("/popularProperties", async(req, res) =>{
+        const result = await popularPropertiesCollection.find().toArray();
+        res.send(result);
+    });
+
+    
 
 
 
