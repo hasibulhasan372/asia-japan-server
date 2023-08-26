@@ -11,8 +11,8 @@ app.use(cors())
 app.use(express.json())
 
 
-app.get("/", (req, res) =>{
-    res.send("Hello Real State Giant")
+app.get("/", (req, res) => {
+  res.send("Hello Real State Giant")
 });
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -34,18 +34,23 @@ async function run() {
 
     const featureCollection = client.db("asiaJapanDB").collection("features");
     const popularPropertiesCollection = client.db("asiaJapanDB").collection("popularProperties");
+    const blogsCollection = client.db("asiaJapanDB").collection("blogs");
 
-    app.get("/features", async(req, res) =>{
-        const result = await featureCollection.find().toArray()
-        res.send(result);
+    app.get("/features", async (req, res) => {
+      const result = await featureCollection.find().toArray()
+      res.send(result);
     });
 
-    app.get("/popularProperties", async(req, res) =>{
-        const result = await popularPropertiesCollection.find().toArray();
-        res.send(result);
+    app.get("/popularProperties", async (req, res) => {
+      const result = await popularPropertiesCollection.find().toArray();
+      res.send(result);
+    });
+    app.get("/blogs", async (req, res) => {
+      const result = await blogsCollection.find().toArray();
+      res.send(result);
     });
 
-    
+
 
 
 
@@ -63,7 +68,7 @@ run().catch(console.dir);
 
 
 
-app.listen(port, () =>{
-    console.log(` Asia Japan Real State is running on :${port}`)
+app.listen(port, () => {
+  console.log(` Asia Japan Real State is running on :${port}`)
 });
 
