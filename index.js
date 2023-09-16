@@ -15,8 +15,13 @@ app.get("/", (req, res) => {
   res.send("Hello Real State Giant")
 });
 
+
+
+
+
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.3ml6ryd.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.bupigg3.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -29,8 +34,9 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
-    // await client.connect();
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+
 
     const featureCollection = client.db("asiaJapanDB").collection("features");
     const popularPropertiesCollection = client.db("asiaJapanDB").collection("popularProperties");
@@ -49,12 +55,6 @@ async function run() {
       const result = await blogsCollection.find().toArray();
       res.send(result);
     });
-
-
-
-
-
-
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -64,7 +64,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
 
 
 
